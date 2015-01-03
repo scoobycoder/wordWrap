@@ -3,50 +3,59 @@ package wordWrap;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class WordWrapTest {
 
 	private Wrap wrap;
 
-	@Before
-	public void setup() {
-		wrap = new Wrap();
-	}
-	
 	@Test
 	public void wrapShouldReturnBlankForNull() {
-		assertEquals("", wrap.wrapper(null, 1));
+		wrap = new Wrap(null, 1);
+		assertEquals("", wrap.wrapper());
 	}
 
 	@Test
 	public void wrapShouldReturnBlankForBlank() {
-		assertEquals("", wrap.wrapper("", 1));
+		wrap = new Wrap("", 1);
+		assertEquals("", wrap.wrapper());
 	}
 	
 	@Test
 	public void wrapShouldReturnOneLetterWordForOneLetterWord() {
-		assertEquals("w", wrap.wrapper("w", 1));
+		wrap = new Wrap("w", 1);
+		assertEquals("w", wrap.wrapper());
 	}
 	
 	@Test
 	public void wrapShouldNotWrapForTwoLetterWrap() {
-		assertEquals("ww", wrap.wrapper("ww", 2));
+		wrap = new Wrap("ww", 2);
+		assertEquals("ww", wrap.wrapper());
 	}
 	
 	@Test
 	public void wrapShouldWrapForTwoLetterWordIfOneLengthSentance() {
-		assertEquals("w\nw", wrap.wrapper("ww", 1));
+		wrap = new Wrap("ww", 1);
+		assertEquals("w\nw", wrap.wrapper());
 	}
 	
 	@Test
 	public void shouldWrapForThreeLetterWordIfOneLengthSentence() {
-		assertEquals("ww\nw", wrap.wrapper("www", 2));
+		wrap = new Wrap("www", 2);
+		assertEquals("ww\nw", wrap.wrapper());
 	}
 	
 	@Test
 	public void shouldWrapOnOneSpace() {
-		assertEquals("www\nw", wrap.wrapper("www w",3));
+		wrap = new Wrap("www w", 3);
+		assertEquals("www\nw", wrap.wrapper());
+	}
+	
+	@Test @Ignore
+	public void shouldWrapWithSpaceAndLongWord() {
+		wrap = new Wrap("www wwww", 3);
+		assertEquals("www\nwww\nw", wrap.wrapper());
 	}
 	
 }
