@@ -3,7 +3,9 @@ package wordWrap;
 public class Wrap {
 
 	public String wrapper(String sentance) {
-		return "";
+		if (sentance == null || sentance.length() < 1)
+			return "";
+		return sentance;
 	}
 
 }
